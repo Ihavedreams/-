@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id='box'></div>
+    <script>
+        let oBox = document.getElementById('box');
+        
+        const obj = {
+            msg: '今朝有酒今朝醉'
+        }
+
+        function updateInner(val) {
+            oBox.innerHTML = val;
+        }
+        updateInner(obj.msg);
+
+        Object.defineProperty(obj, 'msg', {
+            get() {
+                return this._msg
+            },
+            set(newVal) {
+                updateInner(newVal);
+                this._msg = newVal;
+            }
+        })
+
+        // 在控制台输入obj.msg='值' 页面上的值就会随之改变
+
+    </script>
+</body>
+</html>

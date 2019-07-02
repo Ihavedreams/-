@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>spa</title>
+</head>
+<body>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+                // 开始写 jQuery 代码...
+                window.addEventListener('hashchange', function () {
+                var hash = document.location.hash;
+                console.log($ajax)
+                switch (hash) {
+                    case '#y':
+                        $.ajax({
+                            url: './json/y.json',
+                            success: function () {
+                                document.write('她是小仙女！！')
+                            }
+                        })
+                        break;
+
+                    case '#teng':
+                        $.ajax({
+                            url: './json/teng.json',
+                            success: function () {
+                                document.write('他是小帅哥哦@@@')
+                            }
+                        })
+                        break;
+                }
+            })
+
+        });
+        
+    </script>
+    
+</body>
+</html>

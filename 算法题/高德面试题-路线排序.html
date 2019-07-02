@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = { '0': 'a', '1': 'b', '2': 'c' };
+
+            for (var i in obj) {
+
+                console.log(i, ":", obj[i]);
+
+            }
+        const res = {
+            code: 0,
+            data: {
+                lines: '20路,301路,5路,地铁5号线,机场大巴线,107路,机场快轨',
+                lineids: 'lzbd,lwes,lxid,lwic,lwdf,ldfx,loin',
+                linedetails: {
+                    lwdf: {
+                        name: '机场大巴线'
+                    },
+                    lwes: {
+                        name: '301路'
+                    },
+                    lwic: {
+                        name: '地铁5号线'
+                    },
+                    ldfx: {
+                        name: '107路'
+                    },
+                    lzbd: {
+                        name: '20路'
+                    },
+                    lxid: {
+                        name: '5路'
+                    },
+                    loin: {
+                        name: '机场快轨'
+                    }
+                }
+            }
+        };
+
+        // 5路 20 路 107路 301路 地铁5号线 机场快轨 机场大巴线
+
+        
+        
+        function test(res) {
+            let arr = [];
+            let data = res.data.linedetails
+            var a = Object.keys(data)
+            console.log(a,'a')
+            for(var key in data) {
+                arr.push(key)
+                console.log(arr)
+                console.log(arr.length)
+                localStorage.setItem('name',key)
+                
+            }
+        }
+        test(res)
+        
+
+    </script>
+</body>
+</html>
