@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str = ' ( 2 + 0 )-((3-8)-9*(2))';
+        let show = (s) => {
+            const leftArr = []; // 存放左边括号
+            const successArr = []; // 存放成功数据
+            /*遍历字符串*/
+            for(let i=0; i<s.length; i++) {
+                if(s[i]=='(') {
+                    leftArr.push(i)
+                }else if(s[i] == ')') {
+                    if(leftArr.length ==0) {
+                        throw new Error(`位置在${i}的)没有相匹配的`)
+                    }
+                    successArr.push({
+                        str: s,
+                        '左括号下标': leftArr.pop(),
+                        '右括号下标': i
+                    })
+                }
+            }
+            // 检查leftArr的长度是否为0
+            if(leftArr.length!== 0) {
+                let i = leftArr[0];
+                throw new Error(`位置在${i}的(没有相匹配的`)
+            }
+            return successArr
+        }
+        console.log(show(str));
+    </script>
+</body>
+</html>

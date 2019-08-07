@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <input type="text" v-model="inpVal" aaa="aaa" placeholder="请输入">
+        <div>{{inpVal}}</div>
+        {{brotherMsg.content}}
+    </div>
+    <script src='./mvvm1.js'></script>
+    <script>
+        
+        new Mvvm({
+            el: 'box',
+            data: {
+                inpVal: '默认值',
+                brotherMsg: {
+                    content: '数据双向绑定'
+                }
+            }
+        })
+
+//         let obj = {
+//             name: '任育梁'
+//         };
+// console.log(
+//         Object.defineProperty(obj, 'name', {
+//             get() {
+//                 return '古泽腾'
+//             },
+//             set(newName) {
+//                 console.log(newName)
+//             }
+//         }))
+        // console.log(obj.name)
+
+        // console.log(obj.name);
+        // obj.name = '王冰';
+        // console.log(obj.name);
+
+    </script>
+</body>
+</html>

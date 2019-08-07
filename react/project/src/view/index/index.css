@@ -1,0 +1,66 @@
+.index {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    height: 40px;
+    border-bottom: solid 1px #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.section {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.playArea {
+    width: 100%;
+    height: 200px;
+    background: red;
+}
+
+.function {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.function .li {
+    padding: 10px 0;
+}
+
+.tab_head {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background: #eee;
+}
+
+.tab_head span {
+    width: 33.3%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.tab_head .spanactive {
+    background: #7e28e0;
+    font-weight: bold;
+}
+
+.tab .content {
+    display: none;
+}
+
+.tab .contenttab_title_index {
+    display: block;
+}

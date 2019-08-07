@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>数组扁平化、去重、排序</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #contain {
+        margin: 20px 70px;
+    }
+
+    fieldset span {
+        font-size: 15px;
+        font-weight: bold;
+        color: blue;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+    }
+
+    #result {
+        border: solid blueviolet 2px;
+        height: 100%;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+        box-shadow: 5px 3px darkgray;
+        border-radius: 10px;
+    }
+</style>
+
+<body>
+    <div id="contain">
+        <fieldset>
+            <legend>数组扁平化、去重、排序结果：</legend>
+            <span>原始数组：[[1,3,2,1],[5,3, 4, 8, 5, 6, 5],[6, 2, 8, 9,[4, 11, 15, 8, 9, 12, [12,13,[10], 14]]],16]</span>
+            <div id="result"></div>
+        </fieldset>
+    </div>
+    <script>
+        var result = document.getElementById('result')
+        var offsetWidth = result.offsetWidth
+        var margin = (offsetWidth - 530) / 2
+        var div = document.createElement('div')
+        div.style.width = '530px'
+        div.style.textAlign = 'left'
+        div.style.margin = '10px ' + margin + 'px'
+        var text = ''
+        var arr = [
+            [1, 3, 2, 1],
+            [5, 3, 4, 8, 5, 6, 5],
+            [6, 2, 8, 9, [4, 11, 15, 8, 9, 12, [12, 13, [10], 14]]], 16
+        ]
+        text += '*****************扁平**********************' + '<br>'
+        /*
+         * 扁平化
+         */
+        // 扁平化方法一（注意：如果arr数组中有空数组，不使用此方法，用下面的方法;同时数组的值是字符串，不是数字）
+        var newArr = arr.toString().split(',')
+        text += '扁平化方法一(toString)：' + newArr + '<br>'
+
+        // 扁平化方法二(正则表达式)
+        var newArr1 = JSON.parse("[" + JSON.stringify(arr).replace(/(\[\]\,)|[\[\]]*/g, "") + "]");
+        text += '扁平化方法二(正则表达式)：' + newArr1 + '<br>'
+
+        // 扁平化方法三(reduce)
+        function flatten(arr) {
+            return arr.reduce((a, b) => [].concat(Array.isArray(a) && a ? flatten(a) : a, Array.isArray(b) && b ?
+                flatten(b) : b), [])
+        }
+        var newArr2 = flatten(arr)
+        text += '扁平化方法三(reduce)：' + newArr2 + '<br>'
+
+        // 扁平化方法四(遍历数组)
+        var newArr3 = []
+
+        function flat(arr) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] instanceof Array) {
+                    flat(arr[i])
+                } else {
+                    newArr3.push(arr[i])
+                }
+            }
+        }
+        flat(arr)
+        text += '扁平化方法四(遍历数组)：' + newArr3 + '<br><br>'
+
+        text += '*****************去重**********************' + '<br>'
+        /*
+         * 去重
+         */
+        // 去重方法一(Set)
+        var duplicate = Array.from(new Set(newArr1))
+        text += '去重方法一(Set)：' + duplicate + '<br>'
+
+        // 去重方法二(reduce)
+        var duplicate1 = newArr1.reduce((a, b) => {
+            if (a.indexOf(b) === -1) {
+                a.push(b)
+            }
+            return a
+        }, [])
+        text += '去重方法二(reduce)：' + duplicate1 + '<br>'
+
+        // 去重方法三(数组下标去重法)
+        var duplicate2 = newArr1.filter((ele, index, farr) => {
+            return farr.indexOf(ele) === index
+        })
+        text += '去重方法三(数组下标去重法)：' + duplicate2 + '<br>'
+
+        // 去重方法四(遍历数组)
+        var duplicate3 = []
+        for (var i = 0; i < newArr1.length; i++) {
+            if (duplicate3.indexOf(newArr1[i]) === -1) {
+                duplicate3.push(newArr1[i])
+            }
+        }
+        text += '去重方法四(遍历数组)：' + duplicate3 + '<br>'
+
+        // 去重方法五(排序后相邻去重法)
+        function unique3(arr) {
+            arr.sort();
+            var newArr = [arr[0]];
+            for (var i = 1, len = arr.length; i < len; i++) {
+                if (arr[i] !== newArr[newArr.length - 1]) {
+                    newArr.push(arr[i]);
+                }
+            }
+            return newArr;
+        }
+        var duplicate4 = unique3(newArr1)
+        text += '去重方法五(排序后相邻去重法)：' + duplicate4 + '<br><br>'
+
+        text += '*****************排序**********************' + '<br>'
+        /*
+         * 排序
+         */
+        // 排序方法一：(sort方法)
+        function systemSort(arr) {
+            return arr.sort(function (a, b) {
+                return a - b
+            })
+        }
+        var sort = systemSort(duplicate)
+        text += '排序方法一：(sort方法)：' + sort + '<br>'
+
+        // 排序方法二：(冒泡排序)
+        function bubbleSort(arr) {
+            var len = arr.length
+            for (var i = len - 1; i > 0; i--) {
+                for (var j = 0; j < i; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        var tmp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = tmp
+                    }
+                }
+            }
+            return arr
+        }
+        var sort1 = bubbleSort(duplicate)
+        text += '排序方法二：(冒泡排序)：' + sort1 + '<br>'
+
+        // 排序方法三：(插入排序)
+        function insertSort(arr) {
+            var tmp
+            for (var i = 1; i < arr.length; i++) {
+                tmp = arr[i]
+                for (var j = i; j >= 0; j--) {
+                    if (arr[j - 1] > tmp) {
+                        arr[j] = arr[j - 1];
+                    } else {
+                        arr[j] = tmp;
+                        break;
+                    }
+                }
+            }
+            return arr
+        }
+        var sort2 = insertSort(duplicate)
+        text += '排序方法三：(插入排序)：' + sort2 + '<br>'
+
+        div.innerHTML = text
+        result.appendChild(div)
+    </script>
+</body>
+
+</html>

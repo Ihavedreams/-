@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class='box'>
+        <button id='btn'>创建医院</button>
+        <!-- <div>
+            <input type='text' /><button>删除</button>
+        </div> -->
+    </div>
+    <script>
+        // var oDiv = document.getElementsByClassName('box');
+        // console.log(oDiv);
+        var oBtn = document.getElementById('btn');
+        var divs = document.getElementsByTagName('div'); // 动态
+        console.log(divs,'divs');
+
+        // 1、点击按钮 添加医院
+        oBtn.onclick = function() {
+            if(divs.length <= 5) {
+                // 创建节点
+                var oDiv = document.createElement('div');
+                var oInput = document.createElement('input');
+                var oButton = document.createElement('button');
+                oButton.innerHTML = '删除';
+                // 2、讲oInput 和 oButton 添加到oDiv
+                oDiv.appendChild(oInput);
+                oDiv.appendChild(oButton);
+                // 追加到页面上
+                document.body.appendChild(oDiv);
+                // 3、给oButton绑定点击事件
+                oButton.onclick = function() {
+                    document.body.removeChild(oDiv);
+                    btn.style.display = 'block';
+                }
+
+            }else {
+                this.style.display = 'none';
+            }
+        } 
+
+    </script>
+</body>
+</html>

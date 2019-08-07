@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function show(fun) {
+            let timeout = 1000;
+            let flag = true; // 通过闭包保存一个标记
+            return function() {
+                if(!flag) return;
+                setTimeout(() => {
+                    fun.apply(this, arguments);
+                    flag = true;
+                }, timeout);
+            }
+        }
+
+        function fun(e) {
+            console.log(e.target.innerWidth, e.target.innerHeight);
+        }
+        window.addEventListener('resize', show(fun))
+    </script>
+</body>
+</html>

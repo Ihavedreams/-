@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动态获取百度数据</title>
+</head>
+<body>
+    <input type='text' placeholder="请输入关键词" id='inp' />
+    <ul class='ul'>
+        <!-- <li>数据1</li> -->
+    </ul>
+
+    <script>
+        var oInp = document.querySelector('#inp');
+        var oUl = document.querySelector('.ul');
+        
+        function show(json) {
+            console.log(json.s);
+            oUl.innerHTML = '';
+            for(var i=0; i<json.s.length; i++) {
+                var oLi = document.createElement('li');
+                oLi.innerHTML = json.s[i];
+                oUl.appendChild(oLi);
+            }
+        }
+
+        oInp.oninput = function() {
+            var inpVal = this.value;
+            var script = document.createElement('script');
+            // console.log(script)
+            script.src = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+inpVal+'&cb=show';
+            document.documentElement.appendChild(script);
+        }
+
+
+        // https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=%E8%BF%AA%E4%B8%BD%E7%83%AD%E5%B7%B4&cb=show;
+
+        // show;({q:"迪丽热巴",p:false,s:["迪丽热巴图片","迪丽热巴壁纸","迪丽热巴的婚纱照","迪丽热巴邓伦","迪丽热巴生日鹿晗表白","迪丽热巴电视剧","迪丽热巴吧","迪丽热巴全名","迪丽热巴的微博"]});
+
+        /*
+        ##ajax
+        优点
+            无刷新
+            从后台获取数据
+        缺点
+            为了安全，不允许跨域访问数据
+        jsonp（可以跨域获取数据的一种手段）
+            json和jsonp 没有任何的关系
+            json json with padding
+            原理： 动态创建script标签 在全局设置一个全局函数用来接收script引进来的函数调用，在函数中接收数据
+        */
+
+    </script>
+
+</body>
+</html>

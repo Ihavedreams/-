@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [[1,3,4],[3,4,4,5,5,6,6,7],[7,8,9,9,9,1,23, [11,23,23,[12,24, [15]]]],10,11];
+        console.log(arr)
+        
+        
+        bianpinghua(arr);
+        function bianpinghua(arr) {
+            /* 1 数组扁平化 */
+            let newArr = arr.flat(Infinity);
+            /* 2 数组去重 */
+            /* 3 数组排序 */
+            // console.log(newArr)
+            let quchongArr = Array.from(new Set(newArr)).sort(function(a, b) {return a - b});
+            console.log(quchongArr)
+
+            
+        }
+    </script>
+</body>
+</html>

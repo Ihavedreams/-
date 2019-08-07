@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str = '((8 * 9) + ( 7-1)) / 2 + (9+1)';
+        let show = (s) => {
+            const leftArr = []; // 用于存放左括号索引
+            const successArr = []; // 用于存放成功后的数据
+
+            for(i = 0; i < s.length; i++) {
+                // console.log(i)
+                // console.log(s[i])
+                if(s[i] == '(') {
+                    leftArr.push(i)
+                }else if (s[i] == ')') {
+                    if(leftArr.length == 0) {
+                        throw new Error(`位置在${i}的)没有想匹配的`)
+                    }
+                    successArr.push({
+                        left: leftArr.pop(),
+                        right: i
+                    })
+                }
+            }
+            // 检测leftArr的长度是否为0
+            if(leftArr.length !==0) {
+                let i = leftArr[0];
+                throw new Error(`位置在${i}的(没有相匹配的`)
+            }
+            return successArr
+
+
+        }
+        console.log(
+            show(str)
+        )
+    </script>
+</body>
+</html>

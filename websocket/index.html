@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        #show {
+            width: 500px;
+            height: 500px;
+            overflow-y: auto;
+        }
+
+        #show ul li {
+            height: 30px;
+            color: blueviolet;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="show">
+        <ul></ul>
+    </div>
+    <input type="text" id="ipt">
+    <button id="send">发送</button>
+    <script>
+        const ipt = document.getElementById('ipt');
+        const send = document.getElementById('send');
+        const show = document.getElementById('show').firstElementChild;
+        const ws = new WebSocket('ws://localhost:3000');
+        send.onclick = function () {
+            const value = ipt.value;
+            const oLi = document.createElement('li');
+            oLi.innerHTML = value;
+            oLi.style.textAlign = 'right';
+            show.appendChild(oLi);
+            ws.send(value);
+            ipt.value='';
+        }
+        ws.onmessage = function (msg) {
+            const message = JSON.parse(msg.data);
+            if (message.type === 'chat') {
+                const oLi = document.createElement('li');
+                oLi.innerHTML = message.data;
+                show.appendChild(oLi);
+                return;
+            }
+            if(message.type==='msg'){
+                confirm(message.data);
+                return;
+            }
+            if(message.type==='num'){
+                alert(`当前人数是${message.data}`)
+                return
+            }
+        }
+    </script>
+</body>
+
+</html>

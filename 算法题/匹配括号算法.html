@@ -8,7 +8,7 @@
 </head>
 <body>
     <script>
-        let str = '2 + (6 ( 9 - 6 ) * 4 + ( 5 + 4 ) + 8 )';
+        let str = '2 + (6 ( 9 - 6 ) * 4 (+ ( 5 +) 4 ) + 8 )';
 
         function show(s) {
 
@@ -33,11 +33,11 @@
             // 检查leftArr的长度是否为0
             if(leftArr.length !== 0) {
                 let i = leftArr[0];
-                throw new Error(`位置在${i}的)没有相匹配的`);
+                throw new Error(`位置在${i}的(没有相匹配的`);
             }
             return successArr;
         }
-        console.group(show(str));
+        console.log(show(str));
         
     </script>
 </body>
